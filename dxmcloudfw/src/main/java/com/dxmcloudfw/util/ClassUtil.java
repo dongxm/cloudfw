@@ -20,6 +20,10 @@ import java.util.jar.JarFile;
  *  * @author dongxm
  */
 public class ClassUtil {
+    
+//    public static List<Class<?>> getClassInterfaceImpList(String pkgName, boolean isRecursive, Class<? implements MainInterface> main){
+//    
+//    }
 
     public static List<Class<?>> getClassList(String pkgName, boolean isRecursive, Class<? extends Annotation> annotation) {
         List<Class<?>> classList = new ArrayList<Class<?>>();
@@ -36,11 +40,11 @@ public class ClassUtil {
 //                    System.out.println("protocol:" + protocol + " path:" + pkgPath);
                     if ("file".equals(protocol)) {
                         // 本地自己可见的代码
-//                        System.out.println(" - - - - - - - - 1  - - - - - -- - ");
+//                        System.out.println(" - - - - - - - file - 1  - - - - - -- - ");
                         findClassName(classList, pkgName, pkgPath, isRecursive, annotation);
                     } else if ("jar".equals(protocol)) {
                         // 引用第三方jar的代码
-//                        System.out.println(" - - - - - - - - 2  - - - - - -- - ");
+//                        System.out.println(" - - - - - - - -jar  - 1  - - - - - -- - ");
                         findClassName(classList, pkgName, url, isRecursive, annotation);
                     }
                 }
@@ -146,6 +150,11 @@ public class ClassUtil {
         if (clazzList != null && clazzName != null) {
             Class<?> clazz = null;
             try {
+//                System.out.println(" - - - - - addClassName : "+ clazzName);
+                if(clazzName.endsWith(".class"))
+                {
+                    clazzName = clazzName.substring(0,clazzName.lastIndexOf("."));
+                }
                 clazz = Class.forName(clazzName);
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();

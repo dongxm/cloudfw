@@ -114,6 +114,7 @@ public enum DaoFactory {
         /**
          * execute mapper method and finally close sqlSession
          */
+        @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
             Object object = null;
             try {

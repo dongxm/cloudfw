@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class MD5 {
+    
 
     private static final Logger LOG = LogManager.getLogger(MD5.class);
 
@@ -19,9 +20,9 @@ public class MD5 {
         System.out.println(key);
         
         String src = "测试测试";
-        String sign = sign(src, key, "gbk");
+        String sign = sign(src, key, StringUtils.CHART_GBK);
         System.out.println("sign : " + sign);
-        System.out.println("verify : " + verify("测试测试", sign, key, "gbk"));
+        System.out.println("verify : " + verify("测试测试", sign, key, StringUtils.CHART_GBK));
 
         
     }

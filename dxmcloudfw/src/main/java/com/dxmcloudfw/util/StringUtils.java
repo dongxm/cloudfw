@@ -1,166 +1,168 @@
 package com.dxmcloudfw.util;
 
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringUtils {
-	/**
-	 * Converts a line of text into an array of lower case words. Words are
-	 * delimited by the following characters: , .\r\n:/\+
-	 * <p>
-	 * In the future, this method should be changed to use a
-	 * BreakIterator.wordInstance(). That class offers much more fexibility.
-	 * 
-	 * @param text
-	 *            a String of text to convert into an array of words
-	 * @return text broken up into an array of words.
-	 */
-	public static final String[] toLowerCaseWordArray(String text) {
-		if (text == null || text.length() == 0) {
-			return new String[0];
-		}
-		StringTokenizer tokens = new StringTokenizer(text, " ,\r\n.:/\\+");
-		String[] words = new String[tokens.countTokens()];
-		for (int i = 0; i < words.length; i++) {
-			words[i] = tokens.nextToken().toLowerCase();
-		}
-		return words;
-	}
 
-	/**
-	 * Converts a line of text into an array of lower case words. Words are
-	 * delimited by the following characters: , .\r\n:/\+
-	 * <p>
-	 * In the future, this method should be changed to use a
-	 * BreakIterator.wordInstance(). That class offers much more fexibility.
-	 * 
-	 * @param text
-	 *            a String of text to convert into an array of words
-	 * @return text broken up into an array of words.
-	 */
-	public static final String[] toStringArray(String text) {
-		if (text == null || text.length() == 0) {
-			return new String[0];
-		}
-		StringTokenizer tokens = new StringTokenizer(text, ",\r\n/\\");
-		String[] words = new String[tokens.countTokens()];
-		for (int i = 0; i < words.length; i++) {
-			words[i] = tokens.nextToken();
-		}
-		return words;
-	}
+    public static final String CHART_UTF_8 = "utf-8";
+    public static final String CHART_GBK = "gbk";
 
-	/**
-	 * * Converts a line of text into an array of lower case words. Words are
-	 * delimited by the following characters: , .\r\n:/\+
-	 * <p>
-	 * In the future, this method should be changed to use a
-	 * BreakIterator.wordInstance(). That class offers much more fexibility.
-	 * 
-	 * @param text
-	 *            a String of text to convert into an array of words
-	 * @param token
-	 *            String
-	 * @return String[]broken up into an array of words.
-	 */
-	public static final String[] toStringArray(String text, String token) {
-		if (text == null || text.length() == 0) {
-			return new String[0];
-		}
-		StringTokenizer tokens = new StringTokenizer(text, token);
-		String[] words = new String[tokens.countTokens()];
-		for (int i = 0; i < words.length; i++) {
-			words[i] = tokens.nextToken();
-		}
-		return words;
-	}
+    /**
+     * Converts a line of text into an array of lower case words. Words are
+     * delimited by the following characters: , .\r\n:/\+
+     * <p>
+     * In the future, this method should be changed to use a
+     * BreakIterator.wordInstance(). That class offers much more fexibility.
+     *
+     * @param text a String of text to convert into an array of words
+     * @return text broken up into an array of words.
+     */
+    public static final String[] toLowerCaseWordArray(String text) {
+        if (text == null || text.length() == 0) {
+            return new String[0];
+        }
+        StringTokenizer tokens = new StringTokenizer(text, " ,\r\n.:/\\+");
+        String[] words = new String[tokens.countTokens()];
+        for (int i = 0; i < words.length; i++) {
+            words[i] = tokens.nextToken().toLowerCase();
+        }
+        return words;
+    }
 
-	/**
-	 * 
-	 * @param source
-	 * @return
-	 */
-	public static String[] splitOnWhitespace(String source) {
-		int pos = -1;
-		LinkedList<String> list = new LinkedList<String>();
-		int max = source.length();
-		for (int i = 0; i < max; i++) {
-			char c = source.charAt(i);
-			if (Character.isWhitespace(c)) {
-				if (i - pos > 1) {
-					list.add(source.substring(pos + 1, i));
-				}
-				pos = i;
-			}
-		}
-		return list.toArray(new String[list.size()]);
-	}
+    /**
+     * Converts a line of text into an array of lower case words. Words are
+     * delimited by the following characters: , .\r\n:/\+
+     * <p>
+     * In the future, this method should be changed to use a
+     * BreakIterator.wordInstance(). That class offers much more fexibility.
+     *
+     * @param text a String of text to convert into an array of words
+     * @return text broken up into an array of words.
+     */
+    public static final String[] toStringArray(String text) {
+        if (text == null || text.length() == 0) {
+            return new String[0];
+        }
+        StringTokenizer tokens = new StringTokenizer(text, ",\r\n/\\");
+        String[] words = new String[tokens.countTokens()];
+        for (int i = 0; i < words.length; i++) {
+            words[i] = tokens.nextToken();
+        }
+        return words;
+    }
 
-	/**
-	 * Replayer str
-	 * 
-	 * @param str
-	 * @param key
-	 * @param replacement
-	 * @return
-	 */
-	public static final String replaceAll(String str, String key,
-			String replacement) {
-		if (str != null && key != null && replacement != null
-				&& !str.equals("") && !key.equals("")) {
-			StringBuilder strbuf = new StringBuilder();
-			int begin = 0;
-			int slen = str.length();
-			int npos = 0;
-			int klen = key.length();
-			for (; begin < slen && (npos = str.indexOf(key, begin)) >= begin; begin = npos
-					+ klen) {
-				strbuf.append(str.substring(begin, npos)).append(replacement);
-			}
+    /**
+     * * Converts a line of text into an array of lower case words. Words are
+     * delimited by the following characters: , .\r\n:/\+
+     * <p>
+     * In the future, this method should be changed to use a
+     * BreakIterator.wordInstance(). That class offers much more fexibility.
+     *
+     * @param text a String of text to convert into an array of words
+     * @param token String
+     * @return String[]broken up into an array of words.
+     */
+    public static final String[] toStringArray(String text, String token) {
+        if (text == null || text.length() == 0) {
+            return new String[0];
+        }
+        StringTokenizer tokens = new StringTokenizer(text, token);
+        String[] words = new String[tokens.countTokens()];
+        for (int i = 0; i < words.length; i++) {
+            words[i] = tokens.nextToken();
+        }
+        return words;
+    }
 
-			if (begin == 0) {
-				return str;
-			}
-			if (begin < slen) {
-				strbuf.append(str.substring(begin));
-			}
-			return strbuf.toString();
-		} else {
-			return str;
-		}
-	}
-	
-	
-	public static String UnicodeToString(String str) {    
-		Pattern pattern = Pattern.compile("(\\\\u(\\p{XDigit}{4}))");    
-		Matcher matcher = pattern.matcher(str);    
-		char ch;   
-		boolean hasU = false;
-		while (matcher.find()) {   
-			hasU = true;
-			ch = (char) Integer.parseInt(matcher.group(2), 16);     
-			str = str.replace(matcher.group(1), ch + "");    
-		} 
-		String s = str;
-		try{
-			if(!hasU){
-				int i = 0;
-				String rstr = "";
-				while(i+4<=str.length()){
-					ch = (char) Integer.parseInt(str.substring(i,i=i+4), 16); 
-					rstr = rstr+ch;
-				}
-				str = rstr;
-			}
-		}catch(Exception ex){
-			str = s;
-			ex.printStackTrace();
-		}
-		return str;   
-	} 
-    /** 空字符串。 */
+    /**
+     *
+     * @param source
+     * @return
+     */
+    public static String[] splitOnWhitespace(String source) {
+        int pos = -1;
+        LinkedList<String> list = new LinkedList<String>();
+        int max = source.length();
+        for (int i = 0; i < max; i++) {
+            char c = source.charAt(i);
+            if (Character.isWhitespace(c)) {
+                if (i - pos > 1) {
+                    list.add(source.substring(pos + 1, i));
+                }
+                pos = i;
+            }
+        }
+        return list.toArray(new String[list.size()]);
+    }
+
+    /**
+     * Replayer str
+     *
+     * @param str
+     * @param key
+     * @param replacement
+     * @return
+     */
+    public static final String replaceAll(String str, String key,
+            String replacement) {
+        if (str != null && key != null && replacement != null
+                && !str.equals("") && !key.equals("")) {
+            StringBuilder strbuf = new StringBuilder();
+            int begin = 0;
+            int slen = str.length();
+            int npos = 0;
+            int klen = key.length();
+            for (; begin < slen && (npos = str.indexOf(key, begin)) >= begin; begin = npos
+                    + klen) {
+                strbuf.append(str.substring(begin, npos)).append(replacement);
+            }
+
+            if (begin == 0) {
+                return str;
+            }
+            if (begin < slen) {
+                strbuf.append(str.substring(begin));
+            }
+            return strbuf.toString();
+        } else {
+            return str;
+        }
+    }
+
+    public static String UnicodeToString(String str) {
+        Pattern pattern = Pattern.compile("(\\\\u(\\p{XDigit}{4}))");
+        Matcher matcher = pattern.matcher(str);
+        char ch;
+        boolean hasU = false;
+        while (matcher.find()) {
+            hasU = true;
+            ch = (char) Integer.parseInt(matcher.group(2), 16);
+            str = str.replace(matcher.group(1), ch + "");
+        }
+        String s = str;
+        try {
+            if (!hasU) {
+                int i = 0;
+                String rstr = "";
+                while (i + 4 <= str.length()) {
+                    ch = (char) Integer.parseInt(str.substring(i, i = i + 4), 16);
+                    rstr = rstr + ch;
+                }
+                str = rstr;
+            }
+        } catch (Exception ex) {
+            str = s;
+            ex.printStackTrace();
+        }
+        return str;
+    }
+    /**
+     * 空字符串。
+     */
     public static final String EMPTY_STRING = "";
 
     /**
@@ -301,8 +303,17 @@ public class StringUtils {
      *
      * @return 如果不为空, 则返回<code>true</code>
      */
-    public static boolean isNotEmpty(String str) {
-        return ((str != null) && (str.length() > 0));
+    public static boolean isNotEmpty(String... str) {
+        if (str == null) {
+            return false;
+        }
+
+        for (int i = 0; i < str.length; i++) {
+            if ((str[i] == null) || (str[i].trim().length() == 0)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -367,7 +378,7 @@ public class StringUtils {
 
     /**
      * 取指定字符串的子串。
-     * 
+     *
      * <p>
      * 负的索引代表从尾部开始计算。如果字符串为<code>null</code>，则返回<code>null</code>。
      * <pre>
@@ -446,11 +457,13 @@ public class StringUtils {
     }
 
     /**
-     * <p>Checks if the String contains only unicode digits.
-     * A decimal point is not a unicode digit and returns false.</p>
+     * <p>
+     * Checks if the String contains only unicode digits. A decimal point is not
+     * a unicode digit and returns false.</p>
      *
-     * <p><code>null</code> will return <code>false</code>.
-     * An empty String ("") will return <code>true</code>.</p>
+     * <p>
+     * <code>null</code> will return <code>false</code>. An empty String ("")
+     * will return <code>true</code>.</p>
      *
      * <pre>
      * StringUtils.isNumeric(null)   = false
@@ -463,7 +476,7 @@ public class StringUtils {
      * StringUtils.isNumeric("12.3") = false
      * </pre>
      *
-     * @param str  the String to check, may be null
+     * @param str the String to check, may be null
      * @return <code>true</code> if only contains digits, and is non-null
      */
     public static boolean isNumeric(String str) {
@@ -479,121 +492,158 @@ public class StringUtils {
         return true;
     }
 
-	/**
-	 * 字符串拼接
-	 * @param object
-	 * @return
-	 */
-	public static String assemble(char sep,Object... object){
-		if(object == null)return null;
-		StringBuilder sb = new StringBuilder();
-		for(Object obj:object){
-			if(obj == null)obj="";
-			sb.append(obj.toString()).append(sep);
-		}
-		String str = "";
-		if(sb.length()>0){
-			str = sb.substring(0, sb.length()-1);
-		}
-		return str;
-	}
+    /**
+     * 字符串拼接
+     *
+     * @param object
+     * @return
+     */
+    public static String assemble(char sep, Object... object) {
+        if (object == null) {
+            return null;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (Object obj : object) {
+            if (obj == null) {
+                obj = "";
+            }
+            sb.append(obj.toString()).append(sep);
+        }
+        String str = "";
+        if (sb.length() > 0) {
+            str = sb.substring(0, sb.length() - 1);
+        }
+        return str;
+    }
 
-	// 6-16个字母和数字组成
-	private static String regex = "^[A-Za-z0-9]$";
-	/**
-	 * 检测字符串是否符合规则（6-16个字母和数字组成，大小写不敏感）
-	 * @param user
-	 * @return
-	 */
-	public static boolean checkStringLegal(String user) {
-		boolean isMatch = true;
-		char[] userChars = user.toCharArray();
-		for(char c : userChars){
-			isMatch = String.valueOf(c).matches(regex);
-			if(!isMatch){
-				break;
-			}
-		}
-		return isMatch;
-	}
-	
+    // 6-16个字母和数字组成
+    private static String regex = "^[A-Za-z0-9]$";
 
-	public static String getString(String input) {
-		return getString(input, true, "");
-	}
+    /**
+     * 检测字符串是否符合规则（6-16个字母和数字组成，大小写不敏感）
+     *
+     * @param user
+     * @return
+     */
+    public static boolean checkStringLegal(String user) {
+        boolean isMatch = true;
+        char[] userChars = user.toCharArray();
+        for (char c : userChars) {
+            isMatch = String.valueOf(c).matches(regex);
+            if (!isMatch) {
+                break;
+            }
+        }
+        return isMatch;
+    }
 
-	public static String getString(String input, boolean btrim, String dval) {
-		if (input == null)
-			return dval;
-		try {
-			if (btrim)
-				return trim(input);
-			else
-				return input;
-		} catch (Exception e) {
-			return "";
-		}
-	}
+    public static String getString(String input) {
+        return getString(input, true, "");
+    }
 
-	public static String Trim(String str) {
-		return trim(str);
-	}
+    public static String getString(String input, boolean btrim, String dval) {
+        if (input == null) {
+            return dval;
+        }
+        try {
+            if (btrim) {
+                return trim(input);
+            } else {
+                return input;
+            }
+        } catch (Exception e) {
+            return "";
+        }
+    }
 
-	public static String[] Trim(String[] s) {
-		return trim(s);
-	}
+    public static String Trim(String str) {
+        return trim(str);
+    }
 
-	public static String trim(String str) {
-		if (str == null)
-			return "";
-		else
-			return str.trim();
-	}
+    public static String[] Trim(String[] s) {
+        return trim(s);
+    }
 
-	public static String[] trim(String[] s) {
-		if (s == null || s.length <= 0)
-			return s;
-		for (int i = 0; i < s.length; i++)
-			s[i] = trim(s[i]);
-		return s;
-	}
+    public static String trim(String str) {
+        if (str == null) {
+            return "";
+        } else {
+            return str.trim();
+        }
+    }
 
-	public static int getInt(String input, boolean btrim, int dval) {
-		if (input == null)
-			return dval;
-		int val;
-		try {
-			String str = new String(input);
-			if (btrim)
-				str = trim(str);
-			val = Integer.parseInt(str);
-		} catch (Exception e) {
-			val = dval;
-		}
-		return val;
-	}
-	
-	public static int[] getInts(String input) {
-		return getInts(input, ",");
-	}
+    public static String[] trim(String[] s) {
+        if (s == null || s.length <= 0) {
+            return s;
+        }
+        for (int i = 0; i < s.length; i++) {
+            s[i] = trim(s[i]);
+        }
+        return s;
+    }
 
-	public static int[] getInts(String input, String split) {
-		if (input == null) {
-			return null;
-		}
-		
-		String[] ss = input.split(split);
-		int[] ii = new int[ss.length];
-		for (int i=0;i<ii.length;i++) {
-			ii[i] = getInt(ss[i]);
-		}
-		return ii;
-	}
+    public static int getInt(String input, boolean btrim, int dval) {
+        if (input == null) {
+            return dval;
+        }
+        int val;
+        try {
+            String str = new String(input);
+            if (btrim) {
+                str = trim(str);
+            }
+            val = Integer.parseInt(str);
+        } catch (Exception e) {
+            val = dval;
+        }
+        return val;
+    }
 
-	public static int getInt(String input) {
-		return getInt(input, true, 0);
-	}
-	
-	
+    public static int[] getInts(String input) {
+        return getInts(input, ",");
+    }
+
+    public static int[] getInts(String input, String split) {
+        if (input == null) {
+            return null;
+        }
+
+        String[] ss = input.split(split);
+        int[] ii = new int[ss.length];
+        for (int i = 0; i < ii.length; i++) {
+            ii[i] = getInt(ss[i]);
+        }
+        return ii;
+    }
+
+    public static int getInt(String input) {
+        return getInt(input, true, 0);
+    }
+
+    /**
+     * 正则验证
+     */
+    public static boolean regexVerification(String src, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(src);
+        return matcher.matches();
+    }
+
+    /**
+     * 内部使用
+     *
+     * @return
+     */
+    public static String getUuid(String prefix, String suffix) {
+        String key = "" + Calendar.getInstance().getTimeInMillis();
+        key = key.substring(key.length() - 8);
+        String pf = MD5.sign(prefix, key, CHART_UTF_8);
+        String sf = MD5.sign(suffix, key, CHART_UTF_8);
+        return pf.substring(pf.length() - 6) + key + sf.substring(sf.length() - 6);
+
+    }
+    
+    public static void main(String[] s){
+        System.out.println("--- 9a17fe5592217553d932 getUuid: "+getUuid("123" , "456"));
+    }
 }
-
