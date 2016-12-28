@@ -24,7 +24,6 @@ public class NettyRequest {
     private ChannelFuture channelf;
     private DefaultFullHttpRequest request;
     private URI uri;
-    private int port;
     private Cookie cookie;
     private HttpMethod method;
     private String accept;
@@ -74,14 +73,6 @@ public class NettyRequest {
         this.cookie = cookie;
     }
 
-    public int getPort() {
-        return port;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
-    }
-
     public String getContent_type() {
         return content_type;
     }
@@ -105,7 +96,7 @@ public class NettyRequest {
 
     public void init() {
 
-        channelf = HttpClientNetty.b.connect(uri.getHost(), port).syncUninterruptibly();
+        channelf = HttpClientNetty.b.connect(uri.getHost(), uri.getPort()).syncUninterruptibly();
         request = new DefaultFullHttpRequest(HttpVersion.HTTP_1_1, method,
                 this.uri.toASCIIString());
         request.headers().set(HttpHeaderNames.HOST, uri.getHost());

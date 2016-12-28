@@ -97,7 +97,6 @@ public class HttpClientNetty {
             if (re != null && re.getStatus() == HttpResponseStatus.FOUND.code()) {
                 NettyRequest request_rect = new NettyRequest();
                 request_rect.setMethod(request.getMethod());
-                request_rect.setPort(request.getPort());
 
 //                System.out.println("  - - - - -  rediret  - - - -");
                 //处理请求头
@@ -244,7 +243,7 @@ public class HttpClientNetty {
 
             request.setParameters(params);
 
-            request.setPort(8080);
+//            request.setPort(8080);
             request.setUri("http://localhost:8080/open/do_login");
 
 //            request.setPort(8083);
