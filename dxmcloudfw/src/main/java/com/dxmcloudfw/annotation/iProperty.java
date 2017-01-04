@@ -5,7 +5,6 @@
  */
 package com.dxmcloudfw.annotation;
 
-import com.dxmcloudfw.sysenum.TempletEnum;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -15,16 +14,11 @@ import java.lang.annotation.Target;
  *
  * @author dongxm
  */
-@Target(ElementType.TYPE)
+
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface iTempletClass {
-
-    TempletEnum pojoType();// 请求类型 req  ,  res
-
-    String version();
-
-    TempletEnum templetType();// 模板类型 xml , form 
-    
-    String templetName();//模板名称
-
+public @interface iProperty {
+    String propertyViewName() default "";//显示中文名
+    int  setFlag() default 2;// 参数设置标记. 1 需要设定 . 2 可有可无 
 }
+

@@ -39,6 +39,7 @@ public class ServletServer {
     public static void main(String[] args) {
 
         try {
+            
 
             LOG.info("  ------- 2016 12 26----" + PropertiesUtils.getPropert("sys_name") + "--- start server ---------------------");
             init();
